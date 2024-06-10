@@ -41,19 +41,25 @@ let displayValue;
 
 numberInputs.forEach((numberInput) => {
     numberInput.addEventListener("click", () => {
-        inputField.innerText += numberInput.innerText;
-        displayValue = +inputField.innerText;
-        if (operatorClicks == 1) {
-            inputField.innerText = numberInput.innerText;
-            displayValue = +inputField.innerText;
+        if (inputField.innerText == "ERROR") {
+            inputField.innerText = "";
             firstNumber = undefined;
             secondNumber = undefined;
             operator = undefined;
+            operatorClicks = 0;
+        }
+        if (operatorClicks == 1) {
+            inputField.innerText = "";
+            secondNumber = undefined;
             operatorClicks--;
         }
         if (!(operator)) {
+            inputField.innerText += numberInput.innerText;
+            displayValue = +inputField.innerText;
             firstNumber = displayValue;
         } else {
+            inputField.innerText += numberInput.innerText;
+            displayValue = +inputField.innerText;
             secondNumber = displayValue;
         }
     })
@@ -70,17 +76,69 @@ operatorInputs.forEach((operatorInput) => {
                     inputField.innerText = "";
                     operatorClicks = 0;
                 } else if (firstNumber != undefined && secondNumber != undefined) {
+                    if (operator == "/" && secondNumber == 0) {
+                        inputField.innerText = "ERROR";
+                    } else {
                     inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    operator = "+";
                     firstNumber = +inputField.innerText;
                     secondNumber = undefined;
                     operatorClicks++;
+                    }
                 }
                 break;
             case "-":
+                if (firstNumber == undefined && secondNumber == undefined) {
+                    inputField.innerText = "-";
+                } else if (firstNumber != undefined && secondNumber == undefined) {
+                    operator = "-";
+                    inputField.innerText = "";
+                    operatorClicks = 0;
+                } else if (firstNumber != undefined && secondNumber != undefined) {
+                    if (operator == "/" && secondNumber == 0) {
+                        inputField.innerText = "ERROR";
+                    } else {
+                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    operator = "-";
+                    firstNumber = +inputField.innerText;
+                    secondNumber = undefined;
+                    operatorClicks++;
+                    }
+                }
                 break;
             case "*":
+                if (firstNumber != undefined && secondNumber == undefined) {
+                    operator = "*";
+                    inputField.innerText = "";
+                    operatorClicks = 0;
+                } else if (firstNumber != undefined && secondNumber != undefined) {
+                    if (operator == "/" && secondNumber == 0) {
+                        inputField.innerText = "ERROR";
+                    } else {
+                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    operator = "*";
+                    firstNumber = +inputField.innerText;
+                    secondNumber = undefined;
+                    operatorClicks++;
+                    }
+                }
                 break;
             case "/": 
+                if (firstNumber != undefined && secondNumber == undefined) {
+                    operator = "/";
+                    inputField.innerText = "";
+                    operatorClicks = 0;
+                } else if (firstNumber != undefined && secondNumber != undefined) {
+                    if (operator == "/" && secondNumber == 0) {
+                        inputField.innerText = "ERROR";
+                    } else {
+                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    operator = "/";
+                    firstNumber = +inputField.innerText;
+                    secondNumber = undefined;
+                    operatorClicks++;
+                    }
+                }
                 break;
         }
     })
