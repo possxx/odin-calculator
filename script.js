@@ -14,8 +14,8 @@ function divide(a, b) {
     return a / b;
 };
 
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber;
+let secondNumber;
 let operator;
 
 function operate(a, b, operator) {
@@ -31,91 +31,64 @@ function operate(a, b, operator) {
 };
 
 const inputField = document.querySelector(".input-field");
-const numberInput = document.querySelectorAll(".number");
-const operatorInput = document.querySelectorAll(".operator");
+const numberInputs = Array.from(document.querySelectorAll(".number"));
+const operatorInputs = Array.from(document.querySelectorAll(".operator"));
 const resultInput = document.querySelector(".result");
 const commaInput = document.querySelector(".comma");
 const clearInput = document.querySelector(".clear");
 
+let displayValue;
 
-let inputFieldNumber;
-let storeSecondNumber;
-let numberClicks = 0;
-const displayNumber = Array.from(numberInput);
-displayNumber.forEach(number => {
-    number.addEventListener("click", () => {
-         if (operatorClicks == 0) {
-                inputFieldNumber = number.innerText;
-                inputField.innerText = inputField.innerText + inputFieldNumber;
-                firstNumber = +inputField.innerText;
-        } else if (operatorClicks == 1) {
-                inputFieldNumber = number.innerText;
-                inputField.innerText = inputField.innerText + inputFieldNumber;
-                secondNumber = +inputField.innerText;
-                storeSecondNumber = +inputField.innerText.slice();
+numberInputs.forEach((numberInput) => {
+    numberInput.addEventListener("click", () => {
+        inputField.innerText += numberInput.innerText;
+        displayValue = +inputField.innerText;
+        if (operatorClicks == 1) {
+            inputField.innerText = numberInput.innerText;
+            displayValue = +inputField.innerText;
+            firstNumber = undefined;
+            secondNumber = undefined;
+            operator = undefined;
+            operatorClicks--;
+        }
+        if (!(operator)) {
+            firstNumber = displayValue;
         } else {
-                numberClicks += 1;
-                if (numberClicks == 1) {
-                    firstNumber = storeSecondNumber;
-                    inputField.innerText = "";
-                }
-                inputFieldNumber = number.innerText;
-                inputField.innerText = inputField.innerText + inputFieldNumber;
-                secondNumber = +inputField.innerText;
+            secondNumber = displayValue;
         }
     })
 })
 
 let operatorClicks = 0;
-const operatorValue = Array.from(operatorInput);
-operatorValue.forEach(input => {
-    input.addEventListener("click", () => {
-        let value = input.innerText;
-        switch (value) {
+
+operatorInputs.forEach((operatorInput) => {
+    operatorInput.addEventListener("click", () => {
+        switch (operatorInput.innerText) {
             case "+":
-                operator = "+";
-                operatorClicks += 1;
-                inputFieldNumber = "";
-                inputField.innerText = "";
-                numberClicks = 0;
-                storeSecondNumber = secondNumber;
+                if (firstNumber != undefined && secondNumber == undefined) {
+                    operator = "+";
+                    inputField.innerText = "";
+                    operatorClicks = 0;
+                } else if (firstNumber != undefined && secondNumber != undefined) {
+                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    firstNumber = +inputField.innerText;
+                    secondNumber = undefined;
+                    operatorClicks++;
+                }
                 break;
             case "-":
-                operator = "-";
-                operatorClicks += 1;
-                inputFieldNumber = "";
-                inputField.innerText = "";
-                numberClicks = 0;
-                storeSecondNumber = secondNumber;
                 break;
             case "*":
-                operator = "*";
-                operatorClicks += 1;
-                inputFieldNumber = "";
-                inputField.innerText = "";
-                numberClicks = 0;
-                storeSecondNumber = secondNumber;
                 break;
-            case "/":
-                operator = "/";
-                operatorClicks += 1;
-                inputFieldNumber = "";
-                inputField.innerText = "";
-                numberClicks = 0;
-                storeSecondNumber = secondNumber;
+            case "/": 
                 break;
         }
     })
 })
 
-resultInput.addEventListener("click", () => {
-    const result = operate(firstNumber, secondNumber, operator);
-    inputField.innerText = result;
-    operatorClicks = 0;
-    numberClicks = 0;
-    firstNumber = result;
-    secondNumber = 0;
-})
+
+
+
 
 
 
