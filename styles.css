@@ -104,8 +104,7 @@ body {
 .operator:active,
 .comma:active,
 .clear:active,
-.result:active,
-.input-field:active {
+.result:active {
     background-color: hsl(200, 25%, 55%);
     color: hsl(0, 0%, 100%);
 }
