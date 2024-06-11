@@ -32,13 +32,12 @@ function operate(a, b, operator) {
 
 const inputField = document.querySelector(".input-field");
 const numberInputs = Array.from(document.querySelectorAll(".number"));
+const commaInput = document.querySelector(".comma");
 const operatorInputs = Array.from(document.querySelectorAll(".operator"));
 const resultInput = document.querySelector(".result");
-const commaInput = document.querySelector(".comma");
 const clearInput = document.querySelector(".clear");
 
 let displayValue;
-let result;
 
 numberInputs.forEach((numberInput) => {
     numberInput.addEventListener("click", () => {
@@ -75,11 +74,49 @@ numberInputs.forEach((numberInput) => {
     })
 })
 
+commaInput.addEventListener("click", () => {
+    if (inputField.innerText == "ERROR") {
+        inputField.innerText = "";
+        firstNumber = undefined;
+        secondNumber = undefined;
+        operator = undefined;
+        resultClicks = 0;
+        operatorClicks = 0;
+    }
+    if (resultClicks == 1) {
+        inputField.innerText = "";
+        firstNumber = undefined;
+        secondNumber = undefined;
+        operator = undefined;
+        resultClicks = 0;
+        operatorClicks = 0;
+    }
+    if (operatorClicks == 1) {
+        inputField.innerText = "";
+        secondNumber = undefined;
+        operatorClicks = 0;
+    }
+    if (!(operator)) {
+        if (!(inputField.innerText.includes("."))) {
+            inputField.innerText += commaInput.innerText;
+            displayValue = Number(inputField.innerText);
+            firstNumber = displayValue;
+        }
+    } else {
+        if (!(inputField.innerText.includes("."))) {
+            inputField.innerText += commaInput.innerText;
+            displayValue = Number(inputField.innerText);
+            secondNumber = displayValue;
+        }
+    }
+})
+
 /*
 Keeps track of when an operator button is pressed and uses 
 the displayed number after the operation for future calculations.
 */
 let operatorClicks = 0;
+let result;
 
 operatorInputs.forEach((operatorInput) => {
     operatorInput.addEventListener("click", () => {
@@ -201,6 +238,9 @@ resultInput.addEventListener("click", () => {
         }
     }
 })
+
+
+
 
 
 
