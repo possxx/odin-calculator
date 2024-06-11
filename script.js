@@ -55,11 +55,11 @@ numberInputs.forEach((numberInput) => {
         }
         if (!(operator)) {
             inputField.innerText += numberInput.innerText;
-            displayValue = +inputField.innerText;
+            displayValue = Number(inputField.innerText);
             firstNumber = displayValue;
         } else {
             inputField.innerText += numberInput.innerText;
-            displayValue = +inputField.innerText;
+            displayValue = Number(inputField.innerText);
             secondNumber = displayValue;
         }
     })
@@ -81,7 +81,7 @@ operatorInputs.forEach((operatorInput) => {
                     } else {
                     inputField.innerText = operate(firstNumber, secondNumber, operator);
                     operator = "+";
-                    firstNumber = +inputField.innerText;
+                    firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
                     operatorClicks++;
                     }
@@ -100,7 +100,7 @@ operatorInputs.forEach((operatorInput) => {
                     } else {
                     inputField.innerText = operate(firstNumber, secondNumber, operator);
                     operator = "-";
-                    firstNumber = +inputField.innerText;
+                    firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
                     operatorClicks++;
                     }
@@ -117,7 +117,7 @@ operatorInputs.forEach((operatorInput) => {
                     } else {
                     inputField.innerText = operate(firstNumber, secondNumber, operator);
                     operator = "*";
-                    firstNumber = +inputField.innerText;
+                    firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
                     operatorClicks++;
                     }
@@ -134,7 +134,7 @@ operatorInputs.forEach((operatorInput) => {
                     } else {
                     inputField.innerText = operate(firstNumber, secondNumber, operator);
                     operator = "/";
-                    firstNumber = +inputField.innerText;
+                    firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
                     operatorClicks++;
                     }
@@ -143,6 +143,11 @@ operatorInputs.forEach((operatorInput) => {
         }
     })
 })
+
+let resultClicks = 0;
+
+
+
 
 
 
