@@ -113,7 +113,7 @@ commaInput.addEventListener("click", () => {
 
 /*
 Keeps track of when an operator button is pressed and uses 
-the displayed number after the operation for future calculations.
+the displayed number after the operation for the next calculation.
 */
 let operatorClicks = 0;
 let result;
@@ -218,7 +218,7 @@ operatorInputs.forEach((operatorInput) => {
 /*
 Keeps track of when the result button is pressed and effectively clears
 all inputs if it is followed by a number input but uses the displayed
-number for future calculation if it is followed by an operator input.
+number for the next calculation if it is followed by an operator input.
 */
 let resultClicks = 0;
 
@@ -238,6 +238,16 @@ resultInput.addEventListener("click", () => {
         }
     }
 })
+
+clearInput.addEventListener("click", () => {
+    inputField.innerText = "";
+    firstNumber = undefined;
+    secondNumber = undefined;
+    operator = undefined;
+    resultClicks = 0;
+    operatorClicks = 0;
+})
+
 
 
 
