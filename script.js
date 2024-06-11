@@ -19,16 +19,17 @@ let secondNumber;
 let operator;
 
 function operate(a, b, operator) {
-    if (operator == "+") {
-        return add(a, b);
-    } else if (operator == "-") {
-        return subtract(a, b);
-    } else if (operator == "*") {
-        return multiply(a, b);
-    } else if (operator =="/") {
-        return divide(a, b);
+    switch (operator) {
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*": 
+            return multiply(a, b);
+        case "/":
+            return divide(a, b);
     }
-};
+}
 
 const inputField = document.querySelector(".input-field");
 const numberInputs = Array.from(document.querySelectorAll(".number"));
@@ -247,7 +248,6 @@ clearInput.addEventListener("click", () => {
     resultClicks = 0;
     operatorClicks = 0;
 })
-
 
 
 
