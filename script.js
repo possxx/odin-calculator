@@ -38,6 +38,7 @@ const commaInput = document.querySelector(".comma");
 const clearInput = document.querySelector(".clear");
 
 let displayValue;
+let result;
 
 numberInputs.forEach((numberInput) => {
     numberInput.addEventListener("click", () => {
@@ -93,7 +94,11 @@ operatorInputs.forEach((operatorInput) => {
                     if (operator == "/" && secondNumber == 0) {
                         inputField.innerText = "ERROR";
                     } else {
-                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    result = operate(firstNumber, secondNumber, operator);
+                    if (result.toString().includes(".")) {
+                        result = result.toFixed(2);
+                    }
+                    inputField.innerText = result;
                     operator = "+";
                     firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
@@ -113,7 +118,11 @@ operatorInputs.forEach((operatorInput) => {
                     if (operator == "/" && secondNumber == 0) {
                         inputField.innerText = "ERROR";
                     } else {
-                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    result = operate(firstNumber, secondNumber, operator);
+                    if (result.toString().includes(".")) {
+                        result = result.toFixed(2);
+                    }
+                    inputField.innerText = result;
                     operator = "-";
                     firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
@@ -131,7 +140,11 @@ operatorInputs.forEach((operatorInput) => {
                     if (operator == "/" && secondNumber == 0) {
                         inputField.innerText = "ERROR";
                     } else {
-                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    result = operate(firstNumber, secondNumber, operator);
+                    if (result.toString().includes(".")) {
+                        result = result.toFixed(2);
+                    }
+                    inputField.innerText = result;
                     operator = "*";
                     firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
@@ -149,7 +162,11 @@ operatorInputs.forEach((operatorInput) => {
                     if (operator == "/" && secondNumber == 0) {
                         inputField.innerText = "ERROR";
                     } else {
-                    inputField.innerText = operate(firstNumber, secondNumber, operator);
+                    result = operate(firstNumber, secondNumber, operator);
+                    if (result.toString().includes(".")) {
+                        result = result.toFixed(2);
+                    }
+                    inputField.innerText = result;
                     operator = "/";
                     firstNumber = Number(inputField.innerText);
                     secondNumber = undefined;
@@ -173,13 +190,19 @@ resultInput.addEventListener("click", () => {
         if (operator == "/" && secondNumber == 0) {
             inputField.innerText = "ERROR";
         } else {
-        inputField.innerText = operate(firstNumber, secondNumber, operator);
+        result = operate(firstNumber, secondNumber, operator);
+        if (result.toString().includes(".")) {
+            result = result.toFixed(2);
+        }
+        inputField.innerText = result;
         firstNumber = Number(inputField.innerText);
         secondNumber = undefined;
         resultClicks++;
         }
     }
 })
+
+
 
 
 
